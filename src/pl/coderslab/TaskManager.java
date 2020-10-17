@@ -144,7 +144,7 @@ public class TaskManager {
         Path pathFile = Paths.get(pathName); //ładowanie pliku
         List<String> lines = new ArrayList<>();
         if (!Files.exists(pathFile)) {
-            System.out.println("Plik nie istnieje!");
+            System.out.println("File not exist!");
             System.exit(0);
         }
         try {
