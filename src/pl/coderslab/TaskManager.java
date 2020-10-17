@@ -54,7 +54,7 @@ public class TaskManager {
         }
     }
 
-    public static List<String> add(List<String> lines) {
+    public static void add(List<String> lines) {
         Scanner scanner = new Scanner(System.in);
 
         //pobieranie danych do zapisu
@@ -77,7 +77,6 @@ public class TaskManager {
 
 
         lines.add(taskDescription + dueDate + impotranceString);
-        return lines;
     }
 
     public static void remove(List<String> lines) {
