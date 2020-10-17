@@ -129,7 +129,7 @@ public class TaskManager {
         System.out.println("Are you sure you want to exit?\n Yes/No");
         String yesNo = scanner.next();
         if (yesNo.equalsIgnoreCase("Yes")) {
-            saveToFile(pathName, linesToSave);
+            SaveToFile.saveToFile(pathName, linesToSave);
             System.out.println(ConsoleColors.RED + "Bye, bye" + ConsoleColors.RESET);
             System.exit(0);
         } else if (yesNo.equalsIgnoreCase("No")) {
@@ -156,47 +156,18 @@ public class TaskManager {
         }
         System.out.println(lines);
         return lines;
-
-    }
-
-    public static void saveToFile(String pathName, List<String> dataToSave) {
-        Path pathFile = Paths.get(pathName); //ładowanie pliku
-        if (!Files.exists(pathFile)) {
-            System.out.println("Plik nie istnieje!");
-            System.exit(0);
-        }
-        try {
-            Files.write(pathFile, dataToSave);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static String dueDate() {
         String result;
         System.out.println("Year (2020-2099): ");
-        int year = checkNumber(2020, 2099);
+        int year = CheckNumber.checkNumber(2020, 2099);
         System.out.println("Month (1-12): ");
-        int month = checkNumber(1, 12);
+        int month = CheckNumber.checkNumber(1, 12);
         System.out.println("Day (1-31): ");
-        int day = checkNumber(1,31);
+        int day = CheckNumber.checkNumber(1,31);
         result = year + "-" + month + "-" + day + ", ";
         return result;
-    }
-
-    public static int checkNumber(int min, int max){
-        Scanner scanner = new Scanner(System.in);
-        int numberCheked = 0;
-        while (scanner.hasNextInt()) {
-            numberCheked = scanner.nextInt();
-            if (numberCheked >= min && numberCheked <= max){
-                break;
-            } else {
-                System.out.println("Number must be between " + min + "-" + max);
-                scanner.hasNext();
-            }
-        }
-        return numberCheked;
     }
 }
 
