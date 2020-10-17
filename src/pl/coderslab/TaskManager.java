@@ -1,6 +1,8 @@
 package pl.coderslab;
 
 import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class TaskManager {
     }
 
     public static void optionsToSelect(String[] options) {
-        System.out.println(ConsoleColors.GREEN_BACKGROUND + "\n\n" + ConsoleColors.RESET + ConsoleColors.BLUE + "Please select an option:" + ConsoleColors.RESET);
+        System.out.println("_   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   \n" + ConsoleColors.BLUE + "Please select an option:" + ConsoleColors.RESET);
         for (String s : options) {
             System.out.println(s);
         }
@@ -59,7 +61,7 @@ public class TaskManager {
         System.out.println("Please add task description");
         String taskDescription = scanner.nextLine().trim() + ", ";
         System.out.println("Please add task due date. Date format: year-month-day");
-        String dueDate = scanner.nextLine().trim() + ", ";
+        String dueDate = dueDate();// scanner.nextLine().trim() + ", ";
         System.out.println("Is your task important: true/false");
         boolean importance = false;
         while (scanner.hasNext()) {
@@ -107,12 +109,13 @@ public class TaskManager {
     }
 
     public static void list(String pathName, List<String> lines) {
+        System.out.println("_   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   _   \n");
         for (int i = 0; i < lines.size(); i++) {
             //wersja String
             System.out.print(i + " : ");
             String taskLine = lines.get(i);
             String[] taskLineSplitted = StringUtils.split(taskLine, ",");
-            for(String elements : taskLineSplitted){
+            for (String elements : taskLineSplitted) {
                 System.out.print(elements + "  ");
             }
             System.out.println();
@@ -167,6 +170,33 @@ public class TaskManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static String dueDate() {
+        String result;
+        System.out.println("Year (2020-2099): ");
+        int year = checkNumber(2020, 2099);
+        System.out.println("Month (1-12): ");
+        int month = checkNumber(1, 12);
+        System.out.println("Day (1-31): ");
+        int day = checkNumber(1,31);
+        result = year + "-" + month + "-" + day + ", ";
+        return result;
+    }
+
+    public static int checkNumber(int min, int max){
+        Scanner scanner = new Scanner(System.in);
+        int numberCheked = 0;
+        while (scanner.hasNextInt()) {
+            numberCheked = scanner.nextInt();
+            if (numberCheked >= min && numberCheked <= max){
+                break;
+            } else {
+                System.out.println("Number must be between " + min + "-" + max);
+                scanner.hasNext();
+            }
+        }
+        return numberCheked;
     }
 }
+
